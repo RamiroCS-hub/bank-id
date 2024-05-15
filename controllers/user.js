@@ -6,6 +6,7 @@ export class UserController{
 
     if(!isValid.success) return res.send({message: 'The data is invalid', error: isValid.error});
     
-    const user = await getUserByCardNumber(req.body.cardNumber);
+    const user = await checkCredentials(req.body.cardNumber);
+    console.log(user);
   }
 }

@@ -7,7 +7,7 @@ import { sequelize } from './config/database.js';
 
 dotenv.config();
 app.use(json());
-app.use(cors({ origin: true, credentials:true }));
+app.use(cors({ origin: true, credentials: true }));
 
 app.use('/user', router)
 
