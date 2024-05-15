@@ -3,7 +3,7 @@ import express, { json } from 'express';
 const app = express();
 import cors from 'cors';
 import router from './routes/user.js';
-//import { sequelize } from './config/database.js';
+import { sequelize } from './config/database.js';
 
 dotenv.config();
 app.use(json());
@@ -18,10 +18,10 @@ app.use("/", (req, res) => {
     })
 });
 
-/*
+
 sequelize.sync().then(() => {
     console.log('Database synced succesfully');
-})*/
+})
 
 const PORT = process.env.PORT || 3001
 

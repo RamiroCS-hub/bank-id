@@ -1,6 +1,8 @@
+import dotenv from 'dotenv';
+dotenv.config();
 import { Sequelize } from 'sequelize';
 const databaseUrl = process.env.DATABASE_URL;
-/*
+
 export const sequelize = new Sequelize(databaseUrl, {
     dialect: 'postgres',
     protocol: 'postgres',
@@ -18,5 +20,5 @@ sequelize
     console.error('Unable to connect to database:', error)
 });
 
-module.exports = { sequelize, Sequelize };
-*/
+export default sequelize;
+
