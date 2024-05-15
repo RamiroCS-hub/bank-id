@@ -1,10 +1,9 @@
-require("dotenv").config();
-const { Sequelize } = require("sequelize");
+import { Sequelize } from 'sequelize';
 const databaseUrl = process.env.DATABASE_URL;
-
-const sequelize = new Sequelize(databaseUrl, {
-    dialect: "postgres",
-    protocol: "postgres",
+/*
+export const sequelize = new Sequelize(databaseUrl, {
+    dialect: 'postgres',
+    protocol: 'postgres',
     dialectOptions: {
         ssl: true
     },
@@ -20,4 +19,4 @@ sequelize
 });
 
 module.exports = { sequelize, Sequelize };
-
+*/
