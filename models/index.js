@@ -2,7 +2,7 @@
 import {Card} from './card.js';
 import {User} from './user.js';
 
-User.hasMany(Card, { foreignKey: {name: 'card_number'}})
-Card.belongsTo(User, { foreignKey: {name: 'card_number'}})
+User.hasMany(Card, { foreignKey: {name: 'userId'}})
+Card.belongsTo(User, { foreignKey: {name: 'userId'}})
 
 export { Card, User }

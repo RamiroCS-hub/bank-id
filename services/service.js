@@ -13,10 +13,12 @@ export function validateUser(object){
 export async function checkCredentials(cardNumber){
   //Devolver el usuario que matchea con el cardNumber
   try{
-    //const card = await Card.create({ cardNumber: 123});
-    //console.log(card);
-    const result = await User.create({ cardNumber: 123, pin: 1123 });
-    console.log(result);
+    /*const result = await User.create({ firstname: 'Pepe', lastname: 'Perez', email:'pepe@gmail.com', pin: 1123 });
+    console.log('El result fue', result);
+    const card = await Card.create({ cardNumber: 123456, isAuth: true, userId: 1});
+    console.log(card);*/
+    const result = await User.findOne({ })
+
   }catch(e){
     console.log("Error: " + e);
   }

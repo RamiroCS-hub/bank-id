@@ -13,9 +13,5 @@ export const User = sequelize.define('User', {
   pin: {
     type: DataTypes.INTEGER,
     allowNull: false
-  }, 
-  cardNumber: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
   }
 });
