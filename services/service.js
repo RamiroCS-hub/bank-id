@@ -1,5 +1,6 @@
 import z from 'zod';
 import { Card, User } from '../models/index.js';
+import {ValidationError} from '../utils/utils.js';
 
 const userValidation = z.object({
   cardNumber: z.number().int(),
@@ -10,6 +11,8 @@ export function validateUser(object){
   return userValidation.safeParse(object);
 }
 
+
+
 export async function getUserId(cardNumber){
   //Devolver el usuario que matchea con el cardNumber
   try{
@@ -18,11 +21,11 @@ export async function getUserId(cardNumber){
     const card = await Card.create({ cardNumber: 123456, isAuth: true, userId: 1});
     console.log(card);*/
     const { userId, isAuth } = await Card.findOne({ where: {cardNumber: cardNumber } });
-    if(!isAuth) return {userId: null, cardMessage:'Card not found'};
-    return {userId: userId, cardMessage: ''};
+    if(!isAuth) return new ValidationError('Card not found');
+    return userId;
   }catch(e){
     console.log("Error: " + e);
-    return {userId: null, cardMessage: e.message};
+    return new ValidationError(e);
   }
 }
 
@@ -30,10 +33,10 @@ export async function checkCredentials(password, userId) {
   try {
     const { pin } = await User.findOne({ where: { id: userId } });
 
-    if(pin != password) return {user: null, userMessage:'Password incorrect'};
-    return {user: pin, userMessage: 'Login successful'};
+    if(pin != password) return new ValidationError('Password incorrect');
+    return pin;
   } catch (e) {
     console.log("Error: " + e);
-    return {user: null, userMessage:'Password incorrect'};
+    return new ValidationError(e);
   }
 }
