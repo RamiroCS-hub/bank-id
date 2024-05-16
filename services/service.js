@@ -18,11 +18,11 @@ export async function getUserId(cardNumber){
     const card = await Card.create({ cardNumber: 123456, isAuth: true, userId: 1});
     console.log(card);*/
     const { userId, isAuth } = await Card.findOne({ where: {cardNumber: cardNumber } });
-    if(!isAuth) return -1;
-    return userId;
+    if(!isAuth) return {data: null, cardMessage:'Card not found'};
+    return {data: userId, cardMessage: ''};
   }catch(e){
     console.log("Error: " + e);
-    throw e;
+    return {data: null, cardMessage: e.message};
   }
 }
 
@@ -30,10 +30,10 @@ export async function checkCredentials(password, userId) {
   try {
     const { pin } = await User.findOne({ where: { id: userId } });
 
-    if(pin != password) return -1;
-    return 0
+    if(pin != password) return {data: null, message:'Password incorrect'};
+    return {data: 0, userMessage: 'Login successful'};
   } catch (e) {
     console.log("Error: " + e);
-    throw e;
+    return {data: null, userMessage:'Password incorrect'};
   }
 }
