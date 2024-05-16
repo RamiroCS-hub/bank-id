@@ -15,6 +15,6 @@ export class UserController{
     if(user instanceof ValidationError) return res.status(400).send({ message: user.message}); 
 
     const signedData = jwt.sign({data: req.body}, process.env.JWT_SECRET)
-    return res.status(200).send({ message: userMessage , data: signedData });
+    return res.status(200).send({ message: 'Login Succesful' , data: signedData });
   }
 }
