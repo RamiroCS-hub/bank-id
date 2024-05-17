@@ -2,14 +2,15 @@ import dotenv from 'dotenv'
 import express, { json } from 'express';
 const app = express();
 import cors from 'cors';
-import router from './routes/user.js';
+import {userRouter, cardRouter } from './routes/index.js';
 import { sequelize } from './config/database.js';
 
 dotenv.config();
 app.use(json());
 app.use(cors({ origin: true, credentials: true }));
 
-app.use('/user', router)
+app.use('/user', userRouter);
+app.use('/card', cardRouter);
 
 app.use("/", (req, res) => {
     res.json({

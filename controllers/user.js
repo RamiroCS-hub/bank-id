@@ -1,4 +1,4 @@
-import { validateUser, getUserId, checkCredentials, createUser } from "../services/service.js";
+import { validateUser, getUserId, checkCredentials, createUser } from "../services/userService.js";
 import jwt from 'jsonwebtoken';
 import {ValidationError} from '../utils/utils.js';
 
