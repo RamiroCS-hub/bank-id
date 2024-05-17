@@ -4,13 +4,14 @@ const app = express();
 import cors from 'cors';
 import {userRouter, cardRouter } from './routes/index.js';
 import { sequelize } from './config/database.js';
+import { verifyToken } from './middlewares/auth.js';
 
 dotenv.config();
 app.use(json());
 app.use(cors({ origin: true, credentials: true }));
 
 app.use('/user', userRouter);
-app.use('/card', cardRouter);
+app.use('/card', verifyToken ,cardRouter);
 
 app.use("/", (req, res) => {
     res.json({
