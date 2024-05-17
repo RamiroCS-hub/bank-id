@@ -14,7 +14,7 @@ export class UserController{
     const user = await checkCredentials(req.body.password, userId)
     if(user instanceof ValidationError) return res.status(400).send({ message: user.message}); 
 
-    const signedData = jwt.sign({data: req.body}, process.env.JWT_SECRET, {expiresIn: '15m'})
+    const signedData = jwt.sign({data:{body: req.body, id:userId}}, process.env.JWT_SECRET, {expiresIn: '15m'})
     return res.status(200).send({ message: 'Login Succesful' , data: signedData });
   }
 
