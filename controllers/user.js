@@ -22,8 +22,12 @@ export class UserController{
     const isValid = validateNewUser(req.body);
     
     if(!isValid.success) return res.status(400).send({ message: isValid })
-    const {result, card} = await createUser(req.body)
+    const result = await createUser(req.body)
 
-    return res.send({User: result, card: card});
+    return res.send({User: result.user, card: result.card});
+  }
+
+  static async logoutUser(req, res) {
+
   }
 }

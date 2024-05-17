@@ -1,6 +1,6 @@
 import z from 'zod';
 import { Card, User } from '../models/index.js';
-import {ValidationError} from '../utils/utils.js';
+import {CreationError, ValidationError} from '../utils/utils.js';
 import bcrypt from 'bcrypt';
 
 const userValidation = z.object({
@@ -26,10 +26,19 @@ export function validateNewUser(object){
 }
 
 export async function createUser(data){
-  const hashedPass = bcrypt.hashSync(data.pin, 10);
-  const result = await User.create({ firstname: data.firstname, lastname: data.lastname, email: data.email, pin: hashedPass });
-  const card = await Card.create({cardNumber: 123123123, userId: result.id, isAuth: true});
-  return { result, card };
+  try {
+    const hashedPass = bcrypt.hashSync(data.pin, 10);
+    const user = await User.create({ firstname: data.firstname, lastname: data.lastname, email: data.email, pin: hashedPass });
+    const card = await Card.create({cardNumber: 123123123, userId: result.id, isAuth: true});
+    const object = {
+      user: user,
+      card: card
+    }
+    return object;
+  } catch (e) {
+    return CreationError('Creation error Ocurred:',e);
+  }
+  
 }
 
 export async function getUserId(cardNumber){
