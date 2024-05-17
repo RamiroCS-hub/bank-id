@@ -8,15 +8,28 @@ const userValidation = z.object({
   password: z.string()
 })
 
+const newUserValidation = z.object({
+  firstname: z.string(),
+  lastname: z.string(),
+  email: z.string(),
+  pin: z.string(),
+  role: z.string(),
+  cardNumber: z.number().int(),
+})
+
 export function validateUser(object){
   return userValidation.safeParse(object);
 }
 
-export async function createUser(){
-  const hashedPass = bcrypt.hashSync("1123", 10);
-  const result = await User.create({ firstname: 'Pepe', lastname: 'Perez', email:'pepe@gmail.com', pin: hashedPass });
-  const card = await Card.create({cardNumber: 123123123, userId: 1, isAuth: true});
-  return result;
+export function validateNewUser(object){
+  return newUserValidation.safeParse(object);
+}
+
+export async function createUser(data){
+  const hashedPass = bcrypt.hashSync(data.pin, 10);
+  const result = await User.create({ firstname: data.firstname, lastname: data.lastname, email: data.email, pin: hashedPass });
+  const card = await Card.create({cardNumber: 123123123, userId: result.id, isAuth: true});
+  return { result, card };
 }
 
 export async function getUserId(cardNumber){

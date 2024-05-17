@@ -13,5 +13,9 @@ export const User = sequelize.define('User', {
   pin: {
     type: DataTypes.STRING,
     allowNull: false
+  },
+  role: {
+    type: DataTypes.STRING,
+    defaultValue: 'user'
   }
 });
