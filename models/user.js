@@ -11,7 +11,7 @@ export const User = sequelize.define('User', {
   lastname: DataTypes.STRING,
   email: DataTypes.STRING,
   pin: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.STRING,
     allowNull: false
   }
 });

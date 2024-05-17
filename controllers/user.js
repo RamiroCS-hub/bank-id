@@ -1,4 +1,4 @@
-import { validateUser, getUserId, checkCredentials } from "../services/service.js";
+import { validateUser, getUserId, checkCredentials, createUser } from "../services/userService.js";
 import jwt from 'jsonwebtoken';
 import {ValidationError} from '../utils/utils.js';
 
@@ -14,7 +14,12 @@ export class UserController{
     const user = await checkCredentials(req.body.password, userId)
     if(user instanceof ValidationError) return res.status(400).send({ message: user.message}); 
 
-    const signedData = jwt.sign({data: req.body}, process.env.JWT_SECRET)
-    return res.status(200).send({ message: userMessage , data: signedData });
+    const signedData = jwt.sign({data:{body: req.body, id:userId}}, process.env.JWT_SECRET, {expiresIn: '15m'})
+    return res.status(200).send({ message: 'Login Succesful' , data: signedData });
+  }
+
+  static async createUser(req, res) {
+    const result = await createUser()
+    return res.send(result);
   }
 }

@@ -3,3 +3,9 @@ export class ValidationError extends Error {
     super(message);
   }
 }
+
+export class CreationError extends Error {
+  constructor(message){
+    super(message);
+  }
+}
