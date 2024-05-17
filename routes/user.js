@@ -7,5 +7,6 @@ router.get('/', (req, res) => {
 })
 
 router.post('/login', UserController.loginUser)
+router.get('/testUser', UserController.createUser)
 
 export default router;

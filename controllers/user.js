@@ -1,4 +1,4 @@
-import { validateUser, getUserId, checkCredentials } from "../services/service.js";
+import { validateUser, getUserId, checkCredentials, createUser } from "../services/service.js";
 import jwt from 'jsonwebtoken';
 import {ValidationError} from '../utils/utils.js';
 
@@ -16,5 +16,10 @@ export class UserController{
 
     const signedData = jwt.sign({data: req.body}, process.env.JWT_SECRET)
     return res.status(200).send({ message: 'Login Succesful' , data: signedData });
+  }
+
+  static async createUser(req, res) {
+    const result = await createUser()
+    return res.send(result);
   }
 }
