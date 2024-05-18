@@ -8,5 +8,9 @@ export const Card = sequelize.define('Card', {
     type: DataTypes.BOOLEAN,
     defaultValue: false
   },
+  amount: {
+    type: DataTypes.INTEGER,
+    defaultValue: 2000
+  }
 },{timestamps: true});
 
