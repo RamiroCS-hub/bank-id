@@ -9,6 +9,6 @@ userRouter.get('/', (req, res) => {
 
 userRouter.post('/login', UserController.loginUser)
 userRouter.post('/testUser', verifyAdmin, UserController.createUser)
-userRouter.post('logout', verifyToken, UserController.logoutUser)
+userRouter.post('/logout', verifyToken, UserController.logoutUser)
 
 export default userRouter;
