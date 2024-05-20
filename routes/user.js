@@ -1,5 +1,6 @@
 import express from 'express';
 import { UserController } from '../controllers/user.js';
+import { verifyAdmin, verifyToken } from '../middlewares/auth.js';
 const userRouter = express.Router();
 
 userRouter.get('/', (req, res) => {
@@ -7,6 +8,7 @@ userRouter.get('/', (req, res) => {
 })
 
 userRouter.post('/login', UserController.loginUser)
-userRouter.get('/testUser', UserController.createUser)
+userRouter.post('/testUser', verifyAdmin, UserController.createUser)
+userRouter.post('/logout', verifyToken, UserController.logoutUser)
 
 export default userRouter;

@@ -4,8 +4,8 @@ import { CreationError } from '../utils/utils.js';
 export class CardController {
   static async createCard(req, res){
     const isValid = validateData(req.body)
-    if(!isValid) return res.status(400).send(isValid)
-    console.log(req.body.userId, req.userId)
+    if(!isValid.success) return res.status(400).send(isValid)
+    
     if(req.body.userId != req.userId) return res.status(401).send('Not authorized to create a card with that userId')
 
     const cardData = await createCard(req.body)
