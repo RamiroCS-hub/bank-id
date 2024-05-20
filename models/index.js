@@ -1,7 +1,7 @@
 //import { foreignKey } from 'sequelize/lib/query-types';
 import {Card} from './card.js';
 import {User} from './user.js';
-import { Blacklist } from './userBlackList.js';
+import { Blacklist } from './userBlacklist.js';
 import {Transaction} from './transaction.js';
 
 
