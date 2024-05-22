@@ -23,6 +23,7 @@ export const Transaction = sequelize.define(
     },
     description: {
       type: DataTypes.STRING,
+      allowNull: false
     },
     cardId: {
       type: DataTypes.INTEGER,
