@@ -12,6 +12,12 @@ export class CreationError extends Error {
   }
 }
 
+export class TransactionError extends Error {
+  constructor(message){
+    super(message);
+  }
+}
+
 export async function checkBlacklistedTokens(token){
   try {
     const user = await Blacklist.findAll({ where: { token: token } });
