@@ -14,11 +14,11 @@ const cardNumberValidation = z.object({
 })
 
 export function validateTransaction(object) {
-  return transactionValidation.parse(object);
+  return transactionValidation.safeParse(object);
 }
 
-export async function validateGetTransactions(object) {
-  return cardNumberValidation.parse(object)
+export function validateGetTransactions(object) {
+  return cardNumberValidation.safeParse(object)
 }
 
 export async function getAllTransaction(data) {
