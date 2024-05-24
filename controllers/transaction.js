@@ -23,7 +23,7 @@ export class TransactionController {
     const isValid = validateTransaction(req.body);
     console.log(isValid);     
     if(!isValid.success) {
-      const message = isValid.error.issues.map((e) => e)
+      const message = isValid.error.issues.map((e) => ({ path: e.path[0], message: e.message }));
       return res.send({ message: 'Data is invalid', error: message });
     }
     const transaction = await createTransaction(req.body);
