@@ -5,6 +5,7 @@ import cors from 'cors';
 import {userRouter, cardRouter, transactionRouter } from './routes/index.js';
 import { sequelize } from './config/database.js';
 import { verifyToken } from './middlewares/auth.js';
+//import { redisClient } from './utils/redis.js';
 
 dotenv.config();
 app.use(json());
@@ -24,6 +25,8 @@ app.use('/', (req, res) => {
 sequelize.sync().then(() => {
     console.log('Database synced succesfully');
 })
+
+//redisClient()
 
 const PORT = process.env.PORT || 3001
 

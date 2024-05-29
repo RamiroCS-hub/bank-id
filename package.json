@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "dev": "node server.js",
-    "start": "nodemon server.js"
+    "start": "node --watch server.js"
   },
   "keywords": [],
   "author": "",
@@ -20,6 +20,7 @@
     "nodemon": "^3.1.0",
     "pg": "^8.11.5",
     "pg-hstore": "^2.3.4",
+    "redis": "^4.6.14",
     "sequelize": "^6.37.3",
     "zod": "^3.23.8"
   }
