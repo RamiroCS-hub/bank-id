@@ -15,9 +15,8 @@ app.use('/card', verifyToken ,cardRouter);
 app.use('/transactions', transactionRouter);
 
 app.use('/', (req, res) => {
-    res.json({
+    res.status(404).json({
         message: 'Page does not exist',
-        status: 400,
     })
 });
 
