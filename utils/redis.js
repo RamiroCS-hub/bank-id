@@ -6,7 +6,13 @@ dotenv.config()
 
 export const useRedis = (key, cb) => {
   return new Promise( async (res, rej) => {
-    const redisClient = await Redis.createClient().connect()
+    const redisClient = await Redis.createClient({
+      password: process.env.REDIS_PASSWORD,
+      socket: {
+          host: process.env.REDIS_HOSTNAME,
+          port: process.env.REDIS_PORT
+      }
+    }).connect()
       .catch( err => {
         console.error('Ocurrió un error de conexión: ' + err)
         return rej(err)
@@ -16,19 +22,18 @@ export const useRedis = (key, cb) => {
         console.log(err)
         rej(err)
       })
-    console.log(response)
     if(response != null || response != undefined) {
       redisClient.quit()
       return res(JSON.parse(response))
     }
     const result = await cb()
-    console.log(result instanceof ValidationError)  
+    console.log('Transactions son:', result)  
     if(result instanceof ValidationError) {
       redisClient.quit()
       return rej(result.message)
     }
     
-    redisClient.set(key, process.env.REDIS_EXPIRATION, JSON.stringify(result))
+    redisClient.set(key, JSON.stringify(result), {EX: process.env.REDIS_EXPIRATION})
     redisClient.quit()
     return res(result)
   })

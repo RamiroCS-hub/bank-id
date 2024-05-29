@@ -27,8 +27,10 @@ export async function getAllTransaction(data) {
     const card = await Card.findOne({where: { cardNumber: cardNumber }})
 
     if (!card) throw new TransactionError('Card not found');
-
+    
     const transactions = await Transaction.findAll({where: { cardId: card.id }})
+    
+    if(!transactions) return new TransactionError('Transaction not found')
     return transactions
   } catch (error) {
     return new ValidationError(error.message);
