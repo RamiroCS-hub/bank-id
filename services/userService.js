@@ -52,11 +52,11 @@ export async function createUser(data){
 export async function getUserId(cardNumber){
   //Devolver el usuario que matchea con el cardNumber
   try{
-    const { userId, isAuth } = await Card.findOne({ where: {cardNumber: cardNumber } });
+    const { userId, isAuth } = await Card.findOne({ where: { cardNumber: cardNumber } });
     if(!isAuth) return new ValidationError('Card not found');
     return userId;
   }catch(e){
-    console.log("Error: " + e);
+    console.log('Error: ' + e);
     return new ValidationError(e);
   }
 }
@@ -69,7 +69,7 @@ export async function checkCredentials(password, userId) {
     if(!isAuth) return new ValidationError('Password incorrect');
     return '';
   } catch (e) {
-    console.log("Error: " + e);
+    console.log('Error: '+ e);
     return new ValidationError(e);
   }
 }

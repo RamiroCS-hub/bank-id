@@ -26,7 +26,7 @@ export async function getAllTransaction(data) {
     const { cardNumber } = data;
     const card = await Card.findOne({where: { cardNumber: cardNumber }})
 
-    if (!card) throw new TransactionError("Card not found");
+    if (!card) throw new TransactionError('Card not found');
 
     const transactions = await Transaction.findAll({where: { cardId: card.id }})
     return transactions
@@ -39,10 +39,10 @@ export async function getAllTransaction(data) {
 export async function createTransaction(data) {
   try {
     const { cardNumberOrigin, cardNumberDestination, amount, description } = data;
+    console.log(amount)
 
     const cardOrigin = await Card.findOne({ where: { cardNumber: cardNumberOrigin } });
     const cardDestination = await Card.findOne({ where: { cardNumber: cardNumberDestination } });
-
     if (!cardOrigin || !cardDestination) {
       return new ValidationError('Invalid card numbers. Please check.');
     }
@@ -67,6 +67,7 @@ export async function createTransaction(data) {
 
     return transaction;
   } catch (error) {
+    console.log('Ocurrio un error', error.message)
     return new ValidationError(error.message);
   }
 }
