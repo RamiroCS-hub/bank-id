@@ -14,10 +14,10 @@ app.use('/user', userRouter);
 app.use('/card', verifyToken ,cardRouter);
 app.use('/transactions', transactionRouter);
 
-app.use("/", (req, res) => {
+app.use('/', (req, res) => {
     res.json({
-        message: 'Welcome to the API',
-        status: 200,
+        message: 'Page does not exist',
+        status: 400,
     })
 });
 
